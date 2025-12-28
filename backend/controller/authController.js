@@ -42,10 +42,10 @@ const login = async (req, res) => {
     const checkQuery = "SELECT * FROM users WHERE email = ?";
 
     const [result] = await db.promise().query(checkQuery, [email, password]);
-    console.log("hitted");
+    console.log("Hitted");
 
     if (result.length == 0)
-      return res.status(401).json({ message: "Email not founded" });
+      return res.status(401).json({ message: "Email not founded enter a" });
     const user = result[0];
     const comparePassword = await bycrypt.compare(password, user.password);
 
