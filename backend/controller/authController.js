@@ -42,7 +42,7 @@ const login = async (req, res) => {
     const checkQuery = "SELECT * FROM users WHERE email = ?";
 
     const [result] = await db.promise().query(checkQuery, [email, password]);
-    console.log("Hitted");
+    console.log("Hitted sucssussfully");
 
     if (result.length == 0)
       return res.status(401).json({ message: "Email not founded enter a" });
