@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+header {
+  background: #1e272e;
+  padding: 1rem 0;
+  color: #fff;
+  margin: 0 0 1rem;
+}
+header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}/*# sourceMappingURL=styles.css.map */

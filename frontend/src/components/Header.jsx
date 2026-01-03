@@ -12,10 +12,18 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex">
-        <h2>Blood Bank</h2>
-        <button onClick={onHandleClick}>Logout</button>
-      </div>
+      <header>
+        <div className="main-container">
+          <div className="wrapper">
+            <div className="logo">
+            <h2>Blood Bank</h2>
+          </div>
+          <div className="buttons">
+            <button onClick={onHandleClick}>Logout</button>
+          </div>
+          </div>
+        </div>
+      </header>
     </>
   );
 };

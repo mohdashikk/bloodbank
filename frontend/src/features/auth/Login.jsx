@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
 
-const login = () => {
+const Login = () => {
   const [formData, setFomData] = useState({
     email: "",
     password: "",
   });
+
   const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -17,28 +18,23 @@ const login = () => {
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
-    alert("its working well");
 
     const userLoggeIn = await login(formData);
 
+    console.log("user login", userLoggeIn);
+
     if (userLoggeIn.role === "admin") {
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } else {
-      navigate("/profile");
+      navigate("/profile", { replace: true });
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard", { replace: true });
-    }
-  }, [user, navigate]);
 
   console.log("user data from main auth", user);
 
   return (
     <div>
-      <h1>Login {name}</h1>
+      <h1>Logins</h1>
       <form action="" onSubmit={onHandleSubmit}>
         <input
           type="text"
@@ -58,4 +54,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

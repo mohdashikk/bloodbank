@@ -1,14 +1,26 @@
 import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-import { Navigate } from "react-router";
 
-const ProtectedRoutes = ({ adminOnly, children }) => {
+const ProtectedRoutes = ({ adminOnly = false, children }) => {
   const { user, isLoading } = useContext(AuthContext);
 
-  if (isLoading) return <p>Loading......</p>;
-  if (!user) return <Navigate to="/" replace />;
-  if (adminOnly && !user.role === "admin")
+  // ⏳ Still checking auth
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  // 🔒 Not logged in
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+
+  // 👮 Admin-only route protection
+  if (adminOnly && user.role !== "admin") {
     return <Navigate to="/profile" replace />;
+  }
+
+  // ✅ Allowed
   return children;
 };
 

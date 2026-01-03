@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, address, blood_group } = req.body;
 
-  if (!name || !email || !password)
+  if (!name || !email || !password || !address || !blood_group)
     return await res.status(401).json({ message: "Required fields" });
 
   try {
@@ -22,13 +22,22 @@ const register = async (req, res) => {
       return res.status(404).json({ message: " Email already exist" });
 
     const insertData =
-      "INSERT INTO users(name, email, password ,role) VALUES (?,?,?,?)";
+      "INSERT INTO users(name, email, password , role  ,address ,blood_group) VALUES (?,?,?,?,?,?)";
 
     //hash password
 
     const hashPassword = await bycrypt.hash(password, 10);
 
-    await db.promise().query(insertData, [name, email, hashPassword, "user"]);
+    await db
+      .promise()
+      .query(insertData, [
+        name,
+        email,
+        hashPassword,
+        "user",
+        address,
+        blood_group,
+      ]);
 
     res.status(201).json({ message: "User successfully added" });
   } catch (err) {

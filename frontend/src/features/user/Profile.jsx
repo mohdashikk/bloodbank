@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import { AuthContext } from '../../Context/AuthContext'
 
 const Profile = () => {
@@ -6,7 +6,7 @@ const Profile = () => {
     console.log(user)
   return (
     <div>
-        <h2>Welcome {user.role}</h2>
+        <h2>Welcome{user.name}</h2>
         
     </div>
     
