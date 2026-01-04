@@ -9,6 +9,9 @@ const ProtectedRoutes = ({ adminOnly = false, children }) => {
 
   if (!user) return <Navigate to="/" replace />;
 
+  if (!user.role == "user") return <Navigate to="/dasboard" replace />;
+  if (!user.role == "admin") return <Navigate to="/profile" replace />;
+
   if (adminOnly && user.role !== "admin") {
     return <Navigate to="/dasboard" replace />;
   }

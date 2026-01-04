@@ -6,13 +6,16 @@ import "./styles/styles.css";
 
 import { AuthProvider } from "./Context/AuthContext.jsx";
 import App from "./App.jsx";
+import { DonorsProvider } from "./Context/ListContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
+      <DonorsProvider>
       <Router>
         <App />
       </Router>
+      </DonorsProvider>
     </AuthProvider>
   </StrictMode>
 );

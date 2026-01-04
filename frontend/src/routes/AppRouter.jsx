@@ -9,11 +9,12 @@ import { Noroute } from "../pages/Noroute.jsx";
 import { AuthProvider } from "../Context/AuthContext.jsx";
 import ProtectedRoute from "../features/user/ProtectedRopute.jsx";
 import { DonorsProvider } from "../Context/ListContext.jsx";
+import AdminRoute from "../features/auth/AdminRoute.jsx";
+import UserAuth from "../features/auth/UserAuth.jsx";
 
 const AppRouter = () => {
   return (
     <Routes>
-      
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<Noroute />} />
@@ -21,18 +22,19 @@ const AppRouter = () => {
       <Route
         path="/dashboard"
         element={
-          <ProtectedRoute adminOnly>
+          <AdminRoute>
             <Dashboard />
-          </ProtectedRoute>
+          </AdminRoute>
         }
       />
 
       <Route
         path="/profile"
         element={
-          <ProtectedRoute>
+          <UserAuth>
+      
             <Profile />
-          </ProtectedRoute>
+          </UserAuth>
         }
       />
     </Routes>

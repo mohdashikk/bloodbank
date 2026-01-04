@@ -1,20 +1,44 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import api from "../api/axiosInstance";
+import { AuthContext } from "./AuthContext";
 
-export const DonorsContext = createContext();
+export const DonorsContext = createContext(null);
 
 export const DonorsProvider = ({ children }) => {
+
+  const {user, loading : authLoading} = useContext(AuthContext);
+
   const [donors, setDonors] = useState();
+  const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("token");
+
   const donorsList = async () => {
-    const res = await api.get("data/users");
-    setDonors(res.data);
+    setLoading(true);
+    setDonors([]);
+    try {
+      const res = await api.get("data/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setDonors(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
+    if(authLoading) return
+    if(!user){
+      setDonors([]);
+      return
+    }
     donorsList();
-  }, []);
+  }, [user, authLoading]);
 
   return (
-    <DonorsContext.Provider value={donors}>{children}</DonorsContext.Provider>
+    <DonorsContext.Provider value={{ donors, loading }}>
+      {children}
+    </DonorsContext.Provider>
   );
 };
