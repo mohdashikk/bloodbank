@@ -18,24 +18,27 @@ const Login = () => {
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const userLoggeIn = await login(formData);
+      console.log("user login", userLoggeIn);
 
-    const userLoggeIn = await login(formData);
-
-    console.log("user login", userLoggeIn);
-
-    if (userLoggeIn.role === "admin") {
-      navigate("/dashboard", { replace: true });
-    } else {
-      navigate("/profile", { replace: true });
+      if (userLoggeIn && userLoggeIn.role === "admin") {
+        navigate("/dashboard", { replace: true });
+      } else if (userLoggeIn) {
+        navigate("/profile", { replace: true });
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+      alert("Login failed! Please check your credentials.");
     }
   };
 
-  console.log("user data from main auth", user);
+
 
   return (
-    <div>
+    <div className="login-container">
       <h1>Logins</h1>
-      <form action="" onSubmit={onHandleSubmit}>
+      <form action="" onSubmit={onHandleSubmit} className="login-form">
         <input
           type="text"
           name="email"
@@ -43,7 +46,7 @@ const Login = () => {
           onChange={onHandleChange}
         />
         <input
-          type="text"
+          type="password"
           name="password"
           placeholder="password"
           onChange={onHandleChange}

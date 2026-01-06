@@ -1,24 +1,17 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useMemo } from "react";
 import api from "../api/axiosInstance";
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(()=>{
+  const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : null;
   });
-  const [loading, setLoading] = useState(true);
+  // We initialize user from localStorage, so we are not "loading" initially unless we want to verify the token.
+  // For this simple implementation, we can start with loading: false.
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-
-    setLoading(false); // 🔥 must run once
-  }, []);
+  const [loading, setLoading] = useState(false);
 
   const login = async (formData) => {
     try {
@@ -32,7 +25,8 @@ export const AuthProvider = ({ children }) => {
       return user;
     } catch (err) {
       console.error(err);
-      return null;
+
+      throw err;
     }
   };
 
@@ -42,8 +36,15 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const value = useMemo(() => ({
+    user,
+    login,
+    logout,
+    loading
+  }), [user, loading]);
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

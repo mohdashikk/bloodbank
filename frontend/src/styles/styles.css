@@ -2,12 +2,14 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  font-weight: 100;
+  font-weight: 400;
   font-style: normal;
+  background-color: #f1f2f6;
 }
 
 .main-container {
@@ -16,7 +18,7 @@ body {
   padding: 0 3rem;
 }
 
-.primary-button {
+.primary-button, .login-container .login-form button {
   background: none;
   border: none;
   color: #fff;
@@ -25,6 +27,10 @@ body {
   font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.primary-button:hover, .login-container .login-form button:hover {
+  background-color: #e8414f;
 }
 
 header {
@@ -37,4 +43,47 @@ header .wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}/*# sourceMappingURL=styles.css.map */
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+.login-container h1 {
+  margin-bottom: 2rem;
+  color: #2f3542;
+}
+.login-container .login-form {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 15px;
+  border: 1px solid #dfe4ea;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+.login-container .login-form input {
+  padding: 1rem;
+  border: 1px solid #ced6e0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.login-container .login-form input:focus {
+  border-color: #ff4757;
+}
+.login-container .login-form button {
+  width: 100%;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/*# sourceMappingURL=styles.css.map */
