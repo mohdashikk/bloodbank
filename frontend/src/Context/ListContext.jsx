@@ -6,7 +6,7 @@ export const DonorsContext = createContext(null);
 
 export const DonorsProvider = ({ children }) => {
 
-  const {user, loading : authLoading} = useContext(AuthContext);
+  const { user, loading: authLoading } = useContext(AuthContext);
 
   const [donors, setDonors] = useState();
   const [loading, setLoading] = useState(false);
@@ -28,8 +28,8 @@ export const DonorsProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if(authLoading) return
-    if(!user){
+    if (authLoading) return
+    if (!user) {
       setDonors([]);
       return
     }

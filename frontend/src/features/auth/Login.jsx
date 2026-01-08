@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
   const [formData, setFomData] = useState({
@@ -10,6 +11,7 @@ const Login = () => {
 
   const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const notify = () => toast("Wow so easy!");
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
@@ -24,8 +26,11 @@ const Login = () => {
 
       if (userLoggeIn && userLoggeIn.role === "admin") {
         navigate("/dashboard", { replace: true });
+        <ToastContainer />
+
       } else if (userLoggeIn) {
         navigate("/profile", { replace: true });
+        <ToastContainer />
       }
     } catch (error) {
       console.error("Login failed", error);
