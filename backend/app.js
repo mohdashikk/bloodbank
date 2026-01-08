@@ -18,7 +18,7 @@ app.get("/api/test", (req, res) => {
 //api's
 
 app.use("/api/auth", authRoute);
-app.use('/api/data',fetchRoute)
+app.use('/api/data', fetchRoute)
 app.use('/api/user', createProfile)
 
 export default app;

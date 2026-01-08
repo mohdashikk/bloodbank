@@ -6,9 +6,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const register = async (req, res) => {
-  const { name, email, password, address, blood_group } = req.body;
+  const { name, email, phone, address, blood_group, gender, last_donate_date, password, } = req.body;
 
-  if (!name || !email || !password || !address || !blood_group)
+  if (!name || !email || !phone || !address || !blood_group || !gender || !last_donate_date || !password)
+
     return await res.status(401).json({ message: "Required fields" });
 
   try {
@@ -22,7 +23,7 @@ const register = async (req, res) => {
       return res.status(404).json({ message: " Email already exist" });
 
     const insertData =
-      "INSERT INTO users(name, email, password , role  ,address ,blood_group) VALUES (?,?,?,?,?,?)";
+      "INSERT INTO users(name, email,phone,address ,blood_group,gender ,last_donate_date, password , role  ) VALUES (?,?,?,?,?,?,?,?,?)";
 
     //hash password
 
@@ -33,10 +34,14 @@ const register = async (req, res) => {
       .query(insertData, [
         name,
         email,
-        hashPassword,
-        "user",
+        phone,
         address,
         blood_group,
+        gender,
+        last_donate_date,
+        hashPassword,
+        "user",
+
       ]);
 
     res.status(201).json({ message: "User successfully added" });
@@ -78,7 +83,7 @@ const login = async (req, res) => {
 
     return res.status(201).json({
       token,
-      user: { name: user.name, email: user.email, role: user.role },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role },
     });
   } catch (err) {
     console.log(err);
