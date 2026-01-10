@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router";
+import { Route, Link } from "react-router";
 const Header = () => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -18,6 +19,16 @@ const Header = () => {
           <div className="wrapper">
             <div className="logo">
               <h2>Blood Bank</h2>
+            </div>
+            <div className="navigation">
+              <ul>
+                <li>
+                  <Link to="/donorsList">Donors</Link>
+                </li>
+                <li>
+                  <Link to="/about">About Us</Link>
+                </li>
+              </ul>
             </div>
             <div className="buttons">
               {!token ? (

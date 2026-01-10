@@ -8,7 +8,7 @@ export const DonorsProvider = ({ children }) => {
 
   const { user, loading: authLoading } = useContext(AuthContext);
 
-  const [donors, setDonors] = useState();
+  const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
 

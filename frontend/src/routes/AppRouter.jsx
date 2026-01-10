@@ -11,6 +11,7 @@ import ProtectedRoute from "../features/user/ProtectedRopute.jsx";
 import { DonorsProvider } from "../Context/ListContext.jsx";
 import AdminRoute from "../features/auth/AdminRoute.jsx";
 import UserAuth from "../features/auth/UserAuth.jsx";
+import DonorsList from "../pages/DonorsList.jsx";
 
 const AppRouter = () => {
   return (
@@ -32,8 +33,16 @@ const AppRouter = () => {
         path="/profile"
         element={
           <UserAuth>
-      
+
             <Profile />
+          </UserAuth>
+        }
+      />
+      <Route
+        path="/donorsList"
+        element={
+          <UserAuth>
+            <DonorsList />
           </UserAuth>
         }
       />

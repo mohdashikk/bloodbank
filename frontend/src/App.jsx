@@ -1,14 +1,15 @@
 import AppRouter from "./routes/AppRouter";
 import Header from './components/Header'
-import { BrowserRouter as Router} from "react-router-dom";
-import { AuthProvider } from "./Context/AuthContext";
+import { useContext } from "react";
+import { AuthContext } from "./Context/AuthContext";
 
 const App = () => {
+  const { user } = useContext(AuthContext);
   return (
     <>
-   <Header />
+      {user && <Header />}
       <div className="main-container">
-    <AppRouter />
+        <AppRouter />
       </div>
 
     </>

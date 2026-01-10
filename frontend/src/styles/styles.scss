@@ -8,9 +8,9 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  font-weight: 400; 
+  font-weight: 400;
   font-style: normal;
-  background-color: #f1f2f6; 
+  background-color: #f1f2f6;
 }
 
 .main-container {
@@ -36,14 +36,52 @@ body {
 }
 
 header {
-  background: #1e272e;
+  background: #ffffff;
   padding: 1rem 0;
-  color: #fff;
-  margin: 0 0 1rem;
+  color: #2f3542;
+  margin: 0;
+  border-bottom: 1px solid #f1f2f6;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
   .wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .logo {
+      h2 {
+        color: #ff4757;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 24px;
+        letter-spacing: -0.5px;
+      }
+    }
+
+    .navigation {
+      ul {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+
+        li {
+          a {
+            text-decoration: none;
+            color: #2f3542;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: #ff4757;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -53,8 +91,8 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; 
-  
+  min-height: 80vh;
+
   h1 {
     margin-bottom: 2rem;
     color: #2f3542;
@@ -64,8 +102,8 @@ header {
     background-color: #ffffff;
     padding: 3rem;
     border-radius: 15px;
-    border: 1px solid #dfe4ea; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #dfe4ea;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;

@@ -9,9 +9,13 @@ const Login = () => {
     password: "",
   });
 
+  const notify = () => toast("Wow so easy!");
+
+  const [error, setError] = useState(false);
+
   const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const notify = () => toast("Wow so easy!");
+
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
@@ -26,15 +30,15 @@ const Login = () => {
 
       if (userLoggeIn && userLoggeIn.role === "admin") {
         navigate("/dashboard", { replace: true });
-        <ToastContainer />
+      
 
       } else if (userLoggeIn) {
         navigate("/profile", { replace: true });
-        <ToastContainer />
+      
       }
     } catch (error) {
       console.error("Login failed", error);
-      alert("Login failed! Please check your credentials.");
+      setError(true);
     }
   };
 
@@ -42,6 +46,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+        
       <h1>Logins</h1>
       <form action="" onSubmit={onHandleSubmit} className="login-form">
         <input
@@ -57,6 +62,8 @@ const Login = () => {
           onChange={onHandleChange}
         />
         <button type="submit">Login</button>
+
+        {error && <ToastContainer />}
       </form>
     </div>
   );

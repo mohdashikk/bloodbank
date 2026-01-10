@@ -1,0 +1,186 @@
+$primary-color: #ff4757;
+$primary-hover: #ff6b81;
+$text-color: #333;
+$bg-color: #f8f9fa;
+
+.donors-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    .filter-tab {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+        input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
+            background-color: #f8f9fa;
+
+            &:focus {
+                background-color: #fff;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+            }
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: $primary-color;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+
+            &:hover {
+                background-color: $primary-hover;
+            }
+        }
+    }
+
+    .list-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
+
+        .donor-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            flex-direction: column;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(255, 71, 87, 0.15);
+            }
+
+            .card-header {
+                background: linear-gradient(135deg, $primary-color, $primary-hover);
+                padding: 24px; // Increased padding for better spacing
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+
+                .donor-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px; // Increased gap
+
+                    .donor-avatar {
+                        width: 50px; // Slightly larger avatar
+                        height: 50px;
+                        background-color: white; // Solid white background for better contrast
+                        color: $primary-color; // Primary color text
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 700;
+                        font-size: 18px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                        border: 2px solid rgba(255, 255, 255, 0.5);
+                    }
+
+                    h3 {
+                        margin: 0;
+                        font-size: 20px; // Increased font size
+                        color: white;
+                        font-weight: 700; // Increased weight
+                        letter-spacing: 0.5px;
+                        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Added subtle text shadow for readability
+                        line-height: 1.2;
+                    }
+                }
+
+                .blood-group {
+                    background-color: white;
+                    color: $primary-color;
+                    padding: 8px 16px; // Larger padding
+                    border-radius: 12px; // Softer radius
+                    font-size: 18px; // Larger font
+                    font-weight: 800;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+                    border: none;
+                    min-width: 45px; // Ensure consistent width
+                    text-align: center;
+                }
+            }
+
+            .card-body {
+                padding: 25px;
+                flex: 1;
+
+                p {
+                    margin: 15px 0;
+                    color: #555;
+                    font-size: 15px;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                        color: $primary-color;
+                        opacity: 0.8;
+                        flex-shrink: 0;
+                    }
+
+                    span {
+                        color: #2f3542;
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .card-actions {
+                padding: 25px;
+                padding-top: 0;
+
+                .btn-connect {
+                    width: 100%;
+                    padding: 14px;
+                    background-color: $primary-color;
+                    color: white;
+                    border: none;
+                    border-radius: 12px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    font-size: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+
+                    &:hover {
+                        background-color: $primary-hover;
+                        transform: translateY(-2px);
+                        box-shadow: 0 6px 15px rgba(255, 71, 87, 0.4);
+                    }
+                }
+            }
+        }
+    }
+}
