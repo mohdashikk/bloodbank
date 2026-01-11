@@ -23,7 +23,10 @@ const Header = () => {
             <div className="navigation">
               <ul>
                 <li>
-                  <Link to="/donorsList">Donors</Link>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link to="/donorsList">Find Donors</Link>
                 </li>
                 <li>
                   <Link to="/about">About Us</Link>

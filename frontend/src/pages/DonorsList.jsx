@@ -30,44 +30,86 @@ const UserIcon = () => (
 );
 
 const DonorsList = () => {
-    const { donors } = useContext(DonorsContext);
-    console.log(donors)
+    const { donors, filter, setFilter, onHandleClear } = useContext(DonorsContext);
+
+    const onHandleFilter = (e) => {
+
+        const { name, value } = e.target;
+
+        setFilter((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const filteredProducts = donors.filter((donor) => {
+        return (
+            (!filter.blood_group || donor.blood_group === filter.blood_group) &&
+            (!filter.gender || donor.gender === filter.gender) &&
+            donor.address
+                .toLowerCase()
+                .includes(filter.location.toLowerCase())
+
+        )
+    })
+
 
     return (
         <div className="donors-page">
-            <div className="filter-tab">
-                <input type="text" placeholder="Blood Type" />
-                <input type="text" placeholder="Location" />
-                <input type="text" placeholder="Availability" />
-                <button>Clear</button>
+            <div className="filter-tab"  >
+                <select defaultValue="" name="blood_group" value={filter.blood_group} onChange={onHandleFilter}>
+                    <option value="" disabled>Blood Type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+                <input type="text" placeholder="Location" name="location" onChange={onHandleFilter} />
+                <select defaultValue="" name="gender" onChange={onHandleFilter}>
+                    <option value="" disabled>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <button onClick={onHandleClear}>Clear</button>
             </div>
 
 
             <div className="list-wrapper">
 
+
+
+
+
                 {
-                    donors?.map((datas) => (
-                        <div className="donor-card">
-                            <div className="card-header">
-                                <div className="donor-info">
-                                    <div className="donor-avatar">A</div>
-                                    <h3>{datas.name}</h3>
+                    filteredProducts.length === 0 ? (
+                        <p>No data found</p>
+                    ) :
+                        filteredProducts?.map((datas) => (
+                            <div className="donor-card">
+                                <div className="card-header">
+                                    <div className="donor-info">
+                                        <div className="donor-avatar">A</div>
+                                        <h3>{datas.name}</h3>
+                                    </div>
+                                    <div className="blood-group">
+                                        {datas.blood_group}
+                                    </div>
                                 </div>
-                                <div className="blood-group">
-                                    A+
+                                <div className="card-body">
+                                    <p><MapPinIcon /> <span>{datas.address}</span></p>
+                                    <p><PhoneIcon /> <span>{datas.phone}</span></p>
+                                    <p><ClockIcon /> <span>{datas.last_donate_date}</span></p>
+                                    <p><UserIcon /> <span>Any Time</span></p>
+                                </div>
+                                <div className="card-actions">
+                                    <button className="btn-connect" onClick={onHandleClear}>Connect Now</button>
                                 </div>
                             </div>
-                            <div className="card-body">
-                                <p><MapPinIcon /> <span>{datas.address}</span></p>
-                                <p><PhoneIcon /> <span>{datas.phone}</span></p>
-                                <p><ClockIcon /> <span>{datas.last_donate_date}</span></p>
-                                <p><UserIcon /> <span>Any Time</span></p>
-                            </div>
-                            <div className="card-actions">
-                                <button className="btn-connect">Connect Now</button>
-                            </div>
-                        </div>
-                    ))
+                        ))
                 }
 
 

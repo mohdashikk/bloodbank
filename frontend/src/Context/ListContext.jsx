@@ -10,8 +10,13 @@ export const DonorsProvider = ({ children }) => {
 
   const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filter, setFilter] = useState({
+    blood_group: "",
+    gender: "",
+    location: ""
+  })
   const token = localStorage.getItem("token");
-
+  console.log("data from input ", filter)
   const donorsList = async () => {
     setLoading(true);
     setDonors([]);
@@ -27,6 +32,17 @@ export const DonorsProvider = ({ children }) => {
     }
   };
 
+  const onHandleClear = () => {
+
+
+    setFilter({
+      blood_group: "",
+      gender: "",
+      location: "",
+    });
+
+  }
+
   useEffect(() => {
     if (authLoading) return
     if (!user) {
@@ -34,10 +50,10 @@ export const DonorsProvider = ({ children }) => {
       return
     }
     donorsList();
-  }, [user, authLoading]);
+  }, [user, authLoading, filter]);
 
   return (
-    <DonorsContext.Provider value={{ donors, loading }}>
+    <DonorsContext.Provider value={{ donors, loading, filter, setFilter, onHandleClear }}>
       {children}
     </DonorsContext.Provider>
   );
