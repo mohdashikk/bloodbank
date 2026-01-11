@@ -26,4 +26,25 @@ const fetchData = async (req, res) => {
   }
 };
 
-export default fetchData;
+const fetchUser = async (req, res) => {
+
+  const { userId } = req.user;
+
+  let fetchDataQUery = "SELECT * FROM users WHERE id = ?";
+  let params = [userId]
+
+  try {
+
+    const [result] = await db.promise().query(fetchDataQUery, params);
+    console.log("the final result is ", result)
+    return res.status(200).json(result)
+
+
+  } catch (err) {
+    console.log(err)
+    return res.status(404).json({ message: "error" })
+  }
+
+}
+
+export { fetchData, fetchUser };
