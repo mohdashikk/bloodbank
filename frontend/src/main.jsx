@@ -7,14 +7,18 @@ import "./styles/styles.scss";
 import { AuthProvider } from "./Context/AuthContext.jsx";
 import App from "./App.jsx";
 import { DonorsProvider } from "./Context/ListContext.jsx";
+import { UserDataProvider } from "./Context/UserContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <DonorsProvider>
-        <Router>
-          <App />
-        </Router>
+
+        <UserDataProvider>
+          <Router>
+            <App />
+          </Router>
+        </UserDataProvider>
       </DonorsProvider>
     </AuthProvider>
   </StrictMode>
