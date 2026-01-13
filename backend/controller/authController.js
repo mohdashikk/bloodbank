@@ -68,7 +68,7 @@ const login = async (req, res) => {
     if (!comparePassword)
       return res.status(401).json({ message: " Password is not match" });
 
-    //Create token
+    //Genereate token
 
     const token = jwt.sign(
       {
