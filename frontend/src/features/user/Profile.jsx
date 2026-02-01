@@ -60,73 +60,74 @@ const Profile = () => {
         </div>
 
         {
-          editorScreen ? <EditProfile /> === false : <div className="info-grid">
-            <div className="info-group">
-              <span className="info-label">Full Name</span>
-              <input
-                type="text"
-                className="info-value"
-                value={singleUser?.name || ""}
-                readOnly
-                placeholder="Not Provided"
-              />
-            </div>
+          editorScreen && editorScreen ? <EditProfile /> :
+            <div className="info-grid">
+              <div className="info-group">
+                <span className="info-label">Full Name</span>
+                <input
+                  type="text"
+                  className="info-value"
+                  value={singleUser?.name || ""}
+                  readOnly
+                  placeholder="Not Provided"
+                />
+              </div>
 
-            <div className="info-group">
-              <span className="info-label">Email Address</span>
-              <input
-                type="email"
-                className="info-value"
-                value={singleUser?.email || ""}
-                readOnly
-                placeholder="Not Provided"
-              />
-            </div>
+              <div className="info-group">
+                <span className="info-label">Email Address</span>
+                <input
+                  type="email"
+                  className="info-value"
+                  value={singleUser?.email || ""}
+                  readOnly
+                  placeholder="Not Provided"
+                />
+              </div>
 
-            <div className="info-group">
-              <span className="info-label">Phone Number</span>
-              <input
-                type="tel"
-                className="info-value"
-                value={singleUser?.phone || ""}
-                readOnly
-                placeholder="Not Provided"
-              />
-            </div>
+              <div className="info-group">
+                <span className="info-label">Phone Number</span>
+                <input
+                  type="tel"
+                  className="info-value"
+                  value={singleUser?.phone || ""}
+                  readOnly
+                  placeholder="Not Provided"
+                />
+              </div>
 
-            <div className="info-group">
-              <span className="info-label">Blood Group</span>
-              <input
-                type="text"
-                className="info-value"
-                value={singleUser?.blood_group || ""}
-                readOnly
-                placeholder="Not Provided"
-              />
-            </div>
+              <div className="info-group">
+                <span className="info-label">Blood Group</span>
+                <input
+                  type="text"
+                  className="info-value"
+                  value={singleUser?.blood_group || ""}
+                  readOnly
+                  placeholder="Not Provided"
+                />
+              </div>
 
-            <div className="info-group">
-              <span className="info-label">Address</span>
-              <input
-                type="text"
-                className="info-value"
-                value={singleUser?.address || ""}
-                readOnly
-                placeholder="Not Provided"
-              />
-            </div>
+              <div className="info-group">
+                <span className="info-label">Address</span>
+                <input
+                  type="text"
+                  className="info-value"
+                  value={singleUser?.address || ""}
+                  readOnly
+                  placeholder="Not Provided"
+                />
+              </div>
 
-            <div className="info-group">
-              <span className="info-label">Gender</span>
-              <input
-                type="text"
-                className="info-value"
-                value={singleUser?.gender || ""}
-                readOnly
-                placeholder="Not Provided"
-              />
+              <div className="info-group">
+                <span className="info-label">Gender</span>
+                <input
+                  type="text"
+                  className="info-value"
+                  value={singleUser?.gender || ""}
+                  readOnly
+                  placeholder="Not Provided"
+                />
+              </div>
             </div>
-          </div>
         }
 
 

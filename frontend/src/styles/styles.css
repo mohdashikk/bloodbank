@@ -34,15 +34,42 @@ body {
 }
 
 header {
-  background: #1e272e;
+  background: #ffffff;
   padding: 1rem 0;
-  color: #fff;
-  margin: 0 0 1rem;
+  color: #2f3542;
+  margin: 0;
+  border-bottom: 1px solid #f1f2f6;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 header .wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+header .wrapper .logo h2 {
+  color: #ff4757;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+header .wrapper .navigation ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+header .wrapper .navigation ul li a {
+  text-decoration: none;
+  color: #2f3542;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+header .wrapper .navigation ul li a:hover {
+  color: #ff4757;
 }
 
 .login-container {
@@ -84,6 +111,4 @@ header .wrapper {
   width: 100%;
   margin-top: 1rem;
   font-weight: 500;
-}
-
-/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */
