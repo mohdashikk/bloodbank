@@ -9,15 +9,15 @@ const fetchData = async (req, res) => {
 
   try {
     if (role !== "admin") {
-      getData += " WHERE is_approved =? AND id != ? ";
+      getData += " WHERE is_approved = $1 AND id != $2 ";
       params.push(1, loggedUser);
     }
 
     if (role == "admin") {
-      getData += " WHERE id != ?";
+      getData += " WHERE id != $1";
       params.push(1);
     }
-    const [result] = await db.promise().query(getData, params);
+    const { rows: result } = await db.query(getData, params);
     console.log("here is the", role, loggedUser);
 
     return res.status(200).json(result);
@@ -30,15 +30,14 @@ const fetchUser = async (req, res) => {
 
   const { userId } = req.user;
 
-  let fetchDataQUery = "SELECT * FROM users WHERE id = ?";
+  let fetchDataQUery = "SELECT * FROM users WHERE id = $1";
   let params = [userId]
 
   try {
 
-    const [result] = await db.promise().query(fetchDataQUery, params);
+    const { rows: result } = await db.query(fetchDataQUery, params);
     console.log("the final result is ", result)
     return res.status(200).json(result)
-
 
   } catch (err) {
     console.log(err)

@@ -27,28 +27,26 @@ const register = async (req, res) => {
     !last_donate_date ||
     !password
   )
-    return await res.status(401).json({ message: "Required fields" });
+    return await res.status(401).json({ message: "Required field" });
 
   try {
     //check the value is there in db
 
-    const checkQuery = "SELECT * FROM users WHERE email = ?";
+    const checkQuery = "SELECT * FROM users WHERE email = $1";
 
-    const [result] = await db.promise().query(checkQuery, [email]);
+    const { rows: result } = await db.query(checkQuery, [email]);
 
     if (result.length > 0)
       return res.status(404).json({ message: " Email already exist" });
 
     const insertData =
-      "INSERT INTO users(name, email,phone,address ,blood_group,gender ,last_donate_date, password , role  ) VALUES (?,?,?,?,?,?,?,?,?)";
+      "INSERT INTO users(name, email,phone,address ,blood_group,gender ,last_donate_date, password , role  ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
 
     //hash password
 
     const hashPassword = await bycrypt.hash(password, 10);
 
-    await db
-      .promise()
-      .query(insertData, [
+    await db.query(insertData, [
         name,
         email,
         phone,
@@ -69,9 +67,9 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const checkQuery = "SELECT * FROM users WHERE email = ?";
+    const checkQuery = "SELECT * FROM users WHERE email = $1";
 
-    const [result] = await db.promise().query(checkQuery, [email, password]);
+    const { rows: result } = await db.query(checkQuery, [email]);
     console.log("Hitted sucssussfully");
 
     if (result.length == 0)
