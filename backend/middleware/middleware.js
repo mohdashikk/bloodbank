@@ -13,7 +13,7 @@ const protect = (req, res, next) => {
     req.user = decode;
     next();
   } catch (err) {
-    console.log(err);
+    console.log("Protect Middleware Error:", err);
     return res.status(401).json({ message: "Invalid token" });
   }
 };

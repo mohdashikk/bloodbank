@@ -53,7 +53,6 @@ const DonorsList = () => {
         )
     })
 
-
     return (
         <div className="donors-page">
             <div className="filter-tab"  >

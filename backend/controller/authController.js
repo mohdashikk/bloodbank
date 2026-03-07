@@ -6,10 +6,27 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const register = async (req, res) => {
-  const { name, email, phone, address, blood_group, gender, last_donate_date, password, } = req.body;
+  const {
+    name,
+    email,
+    phone,
+    address,
+    blood_group,
+    gender,
+    last_donate_date,
+    password,
+  } = req.body;
 
-  if (!name || !email || !phone || !address || !blood_group || !gender || !last_donate_date || !password)
-
+  if (
+    !name ||
+    !email ||
+    !phone ||
+    !address ||
+    !blood_group ||
+    !gender ||
+    !last_donate_date ||
+    !password
+  )
     return await res.status(401).json({ message: "Required fields" });
 
   try {
@@ -41,7 +58,6 @@ const register = async (req, res) => {
         last_donate_date,
         hashPassword,
         "user",
-
       ]);
 
     res.status(201).json({ message: "User successfully added" });
@@ -78,12 +94,17 @@ const login = async (req, res) => {
         role: user.role,
       },
       process.env.JWT,
-      { expiresIn: "1h" }
+      { expiresIn: "1h" },
     );
 
     return res.status(201).json({
       token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role },
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
     });
   } catch (err) {
     console.log(err);

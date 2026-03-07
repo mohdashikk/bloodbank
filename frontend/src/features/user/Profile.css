@@ -113,6 +113,10 @@
     margin-bottom: 2rem;
     border-bottom: 2px solid #f1f2f6;
     padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 }
 
 .section-header h2 {
@@ -162,6 +166,9 @@
     border-radius: 10px;
     border: 1px solid transparent;
     transition: all 0.3s ease;
+    width: 100%;
+    outline: none;
+    font-family: inherit;
 }
 
 .info-group:hover .info-value {

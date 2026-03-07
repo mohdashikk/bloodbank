@@ -13,7 +13,6 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <DonorsProvider>
-
         <UserDataProvider>
           <Router>
             <App />
@@ -21,5 +20,5 @@ createRoot(document.getElementById("root")).render(
         </UserDataProvider>
       </DonorsProvider>
     </AuthProvider>
-  </StrictMode>
+  </StrictMode>,
 );

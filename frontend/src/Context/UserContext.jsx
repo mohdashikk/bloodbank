@@ -39,8 +39,10 @@ export const UserDataProvider = ({ children }) => {
         fetchData();
     }, [user]);
 
+
+
     return (
-        <UserDataContext.Provider value={{ singleUser }}>
+        <UserDataContext.Provider value={{ singleUser, setSingleUser }}>
             {children}
         </UserDataContext.Provider>
     );
