@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./styles/styles.scss";
+import 'react-toastify/dist/ReactToastify.css';
 
 import { AuthProvider } from "./Context/AuthContext.jsx";
 import App from "./App.jsx";

@@ -1,17 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [formData, setFomData] = useState({
     email: "",
     password: "",
   });
-
-  const notify = () => toast("Wow so easy!");
-
-  const [error, setError] = useState(false);
 
   const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -38,7 +34,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login failed", error);
-      setError(true);
+      toast.error(error?.response?.data?.message || "Login failed. Please check your credentials.");
     }
   };
 
@@ -62,8 +58,6 @@ const Login = () => {
           onChange={onHandleChange}
         />
         <button type="submit">Login</button>
-
-        {error && <ToastContainer />}
       </form>
     </div>
   );

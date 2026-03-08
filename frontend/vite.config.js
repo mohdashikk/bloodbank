@@ -9,5 +9,12 @@ export default defineConfig({
       usePolling: true,
       interval: 300
     }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler'
+      }
+    }
   }
 })

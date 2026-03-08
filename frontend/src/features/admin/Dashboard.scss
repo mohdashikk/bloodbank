@@ -1,0 +1,114 @@
+.admin-dashboard {
+  padding: 3rem 0;
+
+  h2 {
+    color: #2f3542;
+    margin-bottom: 2rem;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  .admin-table-container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: 1.2rem 1.5rem;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f8f9fa;
+        color: #747d8c;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #f1f2f6;
+      }
+
+      td {
+        color: #2f3542;
+        font-size: 15px;
+        border-bottom: 1px solid #f1f2f6;
+
+        .status-badge {
+          display: inline-block;
+          padding: 0.4rem 0.8rem;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          
+          &.pending {
+            background-color: #fff3cd;
+            color: #856404;
+          }
+          
+          &.approved {
+            background-color: #d4edda;
+            color: #155724;
+          }
+        }
+      }
+
+      tr {
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: #fcfcfc;
+        }
+
+        &:last-child td {
+          border-bottom: none;
+        }
+      }
+
+      .actions {
+        display: flex;
+        gap: 0.8rem;
+
+        button {
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: 6px;
+          font-size: 13px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .btn-approve {
+          background-color: #2ed573;
+          color: white;
+
+          &:hover {
+            background-color: #26b962;
+          }
+        }
+
+        .btn-reject {
+          background-color: #ff4757;
+          color: white;
+
+          &:hover {
+            background-color: #ff3344;
+          }
+        }
+      }
+    }
+  }
+
+  .loading-text, .empty-text {
+    text-align: center;
+    color: #747d8c;
+    font-size: 18px;
+    padding: 3rem;
+  }
+}
