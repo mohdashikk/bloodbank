@@ -1,27 +1,43 @@
 import db from "../config/db.js";
 
-
 const profileController = async (req, res) => {
-    const { name, address, blood_group, gender, last_donate_date } = req.body
-    const userId = req.user.userId;
-    try {
-        console.log(userId)
-        const changeQuery = "UPDATE users SET name = $1 , address = $2, blood_group= $3, gender = $4 ,last_donate_date = $5 WHERE id = $6"
+  const { name, address, blood_group, gender, last_donate_date } = req.body;
+  const userId = req.user.userId;
 
-        await db.query(changeQuery, [name, address, blood_group, gender, last_donate_date, userId])
+  try {
+    const changeQuery = `
+      UPDATE users 
+      SET name = $1,
+          address = $2,
+          blood_group = $3,
+          gender = $4,
+          last_donate_date = $5
+      WHERE id = $6
+      RETURNING *
+    `;
 
-        res.status(200).json({
-            message: "Profile Update success"
-        })
+    const result = await db.query(changeQuery, [
+      name,
+      address,
+      blood_group,
+      gender,
+      last_donate_date,
+      userId,
+    ]);
 
-    } catch (err) {
-        console.log(err)
-        return err
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user: result.rows[0],
+    });
+  } catch (err) {
+    console.error(err);
 
-    }
-
-    console.log('profile')
-}
-
+    res.status(500).json({
+      success: false,
+      message: "Server error while updating profile",
+    });
+  }
+};
 
 export default profileController;
