@@ -63,7 +63,6 @@ const register = async (req, res) => {
     res.status(201).json({
       message: "User successfully registered",
     });
-
   } catch (err) {
     console.log(err);
 
@@ -85,7 +84,7 @@ const login = async (req, res) => {
     if (result.length == 0)
       return res.status(401).json({ message: "Email not founded enter a" });
     const user = result[0];
-    const comparePassword = await bycrypt.compare(password, user.password);
+    const comparePassword = await bcrypt.compare(password, user.password);
 
     //Password decode
 
