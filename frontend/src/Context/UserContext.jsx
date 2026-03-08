@@ -25,7 +25,7 @@ export const UserDataProvider = ({ children }) => {
             }
 
             try {
-                const res = await api.get("data/single-user", {
+                const res = await api.get("/data/single-user", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
