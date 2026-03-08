@@ -26,41 +26,51 @@ const register = async (req, res) => {
     !gender ||
     !last_donate_date ||
     !password
-  )
-    return await res.status(401).json({ message: "Required field" });
+  ) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
   try {
-    //check the value is there in db
-
+    // Check if user exists
     const checkQuery = "SELECT * FROM users WHERE email = $1";
+    const { rows } = await db.query(checkQuery, [email]);
 
-    const { rows: result } = await db.query(checkQuery, [email]);
+    if (rows.length > 0) {
+      return res.status(409).json({ message: "Email already exists" });
+    }
 
-    if (result.length > 0)
-      return res.status(404).json({ message: " Email already exist" });
+    // Hash password
+    const hashPassword = await bcrypt.hash(password, 10);
 
-    const insertData =
-      "INSERT INTO users(name, email,phone,address ,blood_group,gender ,last_donate_date, password , role  ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
+    const insertQuery = `
+      INSERT INTO users
+      (name,email,phone,address,blood_group,gender,last_donate_date,password,role)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    `;
 
-    //hash password
+    await db.query(insertQuery, [
+      name,
+      email,
+      phone,
+      address,
+      blood_group,
+      gender,
+      last_donate_date,
+      hashPassword,
+      "user",
+    ]);
 
-    const hashPassword = await bycrypt.hash(password, 10);
+    res.status(201).json({
+      message: "User successfully registered",
+    });
 
-    await db.query(insertData, [
-        name,
-        email,
-        phone,
-        address,
-        blood_group,
-        gender,
-        last_donate_date,
-        hashPassword,
-        "user",
-      ]);
-
-    res.status(201).json({ message: "User successfully added" });
   } catch (err) {
     console.log(err);
+
+    res.status(500).json({
+      message: "Server error",
+      error: err.message,
+    });
   }
 };
 
