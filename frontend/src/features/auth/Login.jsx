@@ -55,52 +55,54 @@ const Login = () => {
 
 
   return (
-    <div className="auth-form-content">
-      <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'center' }}>
-        <Logo />
+    <div className="login-container login">
+      <div className="auth-form-content">
+        <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'center' }}>
+          <Logo />
+        </div>
+
+        <h1>Welcome Back</h1>
+        <p className="subtitle">Please sign in to your LifeDrop account.</p>
+
+        {error && <div className="error-message">{error}</div>}
+
+        <form onSubmit={onHandleSubmit} className="login-form">
+          <div className="form-group">
+            <label>Email Address</label>
+            <input
+              type="text"
+              name="email"
+              placeholder="Email Address"
+              onChange={onHandleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={onHandleChange}
+              required
+            />
+          </div>
+
+          <div className="form-options">
+            <label className="remember-me">
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <a href="#" className="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button type="submit">Sign In</button>
+
+          <p className="redirect">
+            Don't have an account? <Link to="/register">Sign Up</Link>
+          </p>
+        </form>
       </div>
-
-      <h1>Welcome Back</h1>
-      <p className="subtitle">Please sign in to your LifeDrop account.</p>
-
-      {error && <div className="error-message">{error}</div>}
-
-      <form onSubmit={onHandleSubmit} className="login-form">
-        <div className="form-group">
-          <label>Email Address</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email Address"
-            onChange={onHandleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={onHandleChange}
-            required
-          />
-        </div>
-
-        <div className="form-options">
-          <label className="remember-me">
-            <input type="checkbox" />
-            Remember me
-          </label>
-          <a href="#" className="forgot-password">Forgot Password?</a>
-        </div>
-
-        <button type="submit">Sign In</button>
-
-        <p className="redirect">
-          Don't have an account? <Link to="/register">Sign Up</Link>
-        </p>
-      </form>
     </div>
   );
 };
