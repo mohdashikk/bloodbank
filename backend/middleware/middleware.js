@@ -9,7 +9,7 @@ const protect = (req, res, next) => {
   if (!token) return res.status(401).json({ message: "No token available" });
 
   try {
-    const decode = jwt.verify(token, process.env.JWT); // ✅ verify, not decode
+    const decode = jwt.verify(token, process.env.JWT_SECRET); // ✅ verify, not decode
     req.user = decode;
     next();
   } catch (err) {

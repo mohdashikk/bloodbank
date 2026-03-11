@@ -2,19 +2,16 @@ import { useContext, useState } from "react";
 import { UserDataContext } from "../../Context/UserContext";
 import EditProfile from "./EditProfile";
 
-import "./Profile.css";
+import "./Profile.scss";
 
 const Profile = () => {
   const { singleUser } = useContext(UserDataContext);
-
-  const [editorScreen, setEditor] = useState(false)
+  const [editorScreen, setEditor] = useState(false);
 
   const openEditor = () => {
-    setEditor(true)
-  }
+    setEditor(!editorScreen);
+  };
 
-
-  // Helper to get initials
   const getInitials = (name) => {
     return name
       ? name
@@ -39,7 +36,7 @@ const Profile = () => {
         <div className="sidebar-stats">
           <div className="stat-item">
             <span className="stat-label">Member Since</span>
-            <span>
+            <span className="stat-value">
               {singleUser?.created_at
                 ? new Date(singleUser.created_at).toLocaleDateString()
                 : "N/A"}
@@ -47,7 +44,7 @@ const Profile = () => {
           </div>
           <div className="stat-item">
             <span className="stat-label">Last Donation</span>
-            <span>{singleUser?.last_donate_date || "Never"}</span>
+            <span className="stat-value">{singleUser?.last_donate_date || "Never"}</span>
           </div>
         </div>
       </div>
@@ -55,83 +52,49 @@ const Profile = () => {
       {/* Right Column: Full Details */}
       <div className="profile-card profile-details">
         <div className="section-header">
-          <h2>Personal Information</h2>
-          <div className="edit-btn" onClick={openEditor}>Edit</div>
+          <h2>{editorScreen ? "Edit Profile" : "Personal Information"}</h2>
+          <div className="edit-btn" onClick={openEditor}>
+            {editorScreen ? "View Profile" : "Edit Profile"}
+          </div>
         </div>
 
-        {
-          editorScreen && editorScreen ? <EditProfile /> :
-            <div className="info-grid">
-              <div className="info-group">
-                <span className="info-label">Full Name</span>
-                <input
-                  type="text"
-                  className="info-value"
-                  value={singleUser?.name || ""}
-                  readOnly
-                  placeholder="Not Provided"
-                />
-              </div>
-
-              <div className="info-group">
-                <span className="info-label">Email Address</span>
-                <input
-                  type="email"
-                  className="info-value"
-                  value={singleUser?.email || ""}
-                  readOnly
-                  placeholder="Not Provided"
-                />
-              </div>
-
-              <div className="info-group">
-                <span className="info-label">Phone Number</span>
-                <input
-                  type="tel"
-                  className="info-value"
-                  value={singleUser?.phone || ""}
-                  readOnly
-                  placeholder="Not Provided"
-                />
-              </div>
-
-              <div className="info-group">
-                <span className="info-label">Blood Group</span>
-                <input
-                  type="text"
-                  className="info-value"
-                  value={singleUser?.blood_group || ""}
-                  readOnly
-                  placeholder="Not Provided"
-                />
-              </div>
-
-              <div className="info-group">
-                <span className="info-label">Address</span>
-                <input
-                  type="text"
-                  className="info-value"
-                  value={singleUser?.address || ""}
-                  readOnly
-                  placeholder="Not Provided"
-                />
-              </div>
-
-              <div className="info-group">
-                <span className="info-label">Gender</span>
-                <input
-                  type="text"
-                  className="info-value"
-                  value={singleUser?.gender || ""}
-                  readOnly
-                  placeholder="Not Provided"
-                />
-              </div>
+        {editorScreen ? (
+          <div className="edit-profile-form">
+            <EditProfile />
+          </div>
+        ) : (
+          <div className="info-grid">
+            <div className="info-group">
+              <span className="info-label">Full Name</span>
+              <div className="info-value-box">{singleUser?.name || "Not Provided"}</div>
             </div>
-        }
 
+            <div className="info-group">
+              <span className="info-label">Email Address</span>
+              <div className="info-value-box">{singleUser?.email || "Not Provided"}</div>
+            </div>
 
+            <div className="info-group">
+              <span className="info-label">Phone Number</span>
+              <div className="info-value-box">{singleUser?.phone || "Not Provided"}</div>
+            </div>
 
+            <div className="info-group">
+              <span className="info-label">Blood Group</span>
+              <div className="info-value-box">{singleUser?.blood_group || "Not Provided"}</div>
+            </div>
+
+            <div className="info-group">
+              <span className="info-label">Address</span>
+              <div className="info-value-box">{singleUser?.address || "Not Provided"}</div>
+            </div>
+
+            <div className="info-group">
+              <span className="info-label">Gender</span>
+              <div className="info-value-box">{singleUser?.gender || "Not Provided"}</div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

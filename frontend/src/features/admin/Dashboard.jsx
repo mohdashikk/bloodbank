@@ -35,8 +35,8 @@ const Dashboard = () => {
                 </td>
                 <td className="actions">
                   {!user.is_approved ? (
-                    <button 
-                      className="btn-approve" 
+                    <button
+                      className="btn-approve"
                       onClick={() => approveDonor(user.id)}
                     >
                       Approve

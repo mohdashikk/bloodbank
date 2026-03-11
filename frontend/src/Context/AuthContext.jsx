@@ -30,6 +30,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const registerUser = async (formData) => {
+    try {
+      const res = await api.post("/auth/register", formData);
+      return res.data;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -40,6 +50,7 @@ export const AuthProvider = ({ children }) => {
     user,
     login,
     logout,
+    registerUser,
     loading
   }), [user, loading]);
 

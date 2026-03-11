@@ -27,24 +27,20 @@ const fetchData = async (req, res) => {
 };
 
 const fetchUser = async (req, res) => {
-
   const { userId } = req.user;
 
   let fetchDataQUery = "SELECT * FROM users WHERE id = $1";
-  let params = [userId]
+  let params = [userId];
 
   try {
-
     const { rows: result } = await db.query(fetchDataQUery, params);
-    console.log("the final result is ", result)
-    return res.status(200).json(result)
-
+    console.log("the final result is ", result);
+    return res.status(200).json(result);
   } catch (err) {
-    console.log(err)
-    return res.status(404).json({ message: "error" })
+    console.log(err);
+    return res.status(404).json({ message: "error" });
   }
-
-}
+};
 
 const approveUser = async (req, res) => {
   const { id } = req.params;
@@ -55,7 +51,8 @@ const approveUser = async (req, res) => {
   }
 
   try {
-    const updateQuery = "UPDATE users SET is_approved = true WHERE id = $1 RETURNING id, name, is_approved";
+    const updateQuery =
+      "UPDATE users SET is_approved = 1 WHERE id = $1 RETURNING id, name, is_approved";
     const { rows: result } = await db.query(updateQuery, [id]);
 
     if (result.length === 0) {
@@ -64,7 +61,7 @@ const approveUser = async (req, res) => {
 
     return res.status(200).json({
       message: "User approved successfully",
-      user: result[0]
+      user: result[0],
     });
   } catch (err) {
     console.log(err);

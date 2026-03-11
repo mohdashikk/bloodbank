@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { useNavigate } from "react-router";
-import { Route, Link } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
+import Logo from "./Logo";
 const Header = () => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -17,9 +17,7 @@ const Header = () => {
       <header>
         <div className="main-container">
           <div className="wrapper">
-            <div className="logo">
-              <h2>Blood Bank</h2>
-            </div>
+            <Logo />
             <div className="navigation">
               <ul>
                 <li>

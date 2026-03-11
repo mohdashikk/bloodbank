@@ -1,68 +1,112 @@
+@use "sass:color";
+
+$primary-red: #ff4757;
+$success-green: #2ed573;
+$pending-orange: #ffa502;
+$text-dark: #2f3542;
+$text-muted: #747d8c;
+$bg-white: #ffffff;
+$border-color: #f1f2f6;
+
 .admin-dashboard {
   padding: 3rem 0;
 
   h2 {
-    color: #2f3542;
+    color: $text-dark;
     margin-bottom: 2rem;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: $primary-red;
+      border-radius: 2px;
+      margin-top: 0.5rem;
+    }
   }
 
   .admin-table-container {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    
+    background: $bg-white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid $border-color;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+
     .admin-table {
       width: 100%;
       border-collapse: collapse;
+      min-width: 700px;
 
       th,
       td {
-        padding: 1.2rem 1.5rem;
+        padding: 1.5rem;
         text-align: left;
+
+        @media (max-width: 768px) {
+          padding: 1rem;
+        }
       }
 
       th {
-        background-color: #f8f9fa;
-        color: #747d8c;
-        font-weight: 600;
-        font-size: 14px;
+        background-color: #fafbfc;
+        color: $text-muted;
+        font-weight: 700;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        border-bottom: 2px solid #f1f2f6;
+        letter-spacing: 1px;
+        border-bottom: 2px solid $border-color;
       }
 
       td {
-        color: #2f3542;
-        font-size: 15px;
-        border-bottom: 1px solid #f1f2f6;
+        color: $text-dark;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-bottom: 1px solid $border-color;
 
         .status-badge {
-          display: inline-block;
-          padding: 0.4rem 0.8rem;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 600;
-          
-          &.pending {
-            background-color: #fff3cd;
-            color: #856404;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.5rem 1rem;
+          border-radius: 50px;
+          font-size: 0.75rem;
+          font-weight: 700;
+
+          &::before {
+            content: "●";
+            font-size: 0.6rem;
           }
-          
+
+          &.pending {
+            background-color: rgba($pending-orange, 0.1);
+            color: $pending-orange;
+          }
+
           &.approved {
-            background-color: #d4edda;
-            color: #155724;
+            background-color: rgba($success-green, 0.1);
+            color: $success-green;
           }
         }
       }
 
       tr {
-        transition: background-color 0.2s ease;
+        transition: all 0.2s ease;
 
         &:hover {
-          background-color: #fcfcfc;
+          background-color: #f9fafb;
         }
 
         &:last-child td {
@@ -73,42 +117,54 @@
       .actions {
         display: flex;
         gap: 0.8rem;
+        align-items: center;
 
         button {
-          padding: 0.5rem 1rem;
+          padding: 0.6rem 1.2rem;
           border: none;
-          border-radius: 6px;
-          font-size: 13px;
-          font-weight: 500;
+          border-radius: 10px;
+          font-size: 0.85rem;
+          font-weight: 700;
           cursor: pointer;
           transition: all 0.2s ease;
+
+          &:hover {
+            transform: translateY(-2px);
+          }
         }
 
         .btn-approve {
-          background-color: #2ed573;
+          background-color: $success-green;
           color: white;
+          box-shadow: 0 4px 12px rgba($success-green, 0.2);
 
           &:hover {
-            background-color: #26b962;
+            background-color: color.adjust($success-green, $lightness: -5%);
+            box-shadow: 0 6px 15px rgba($success-green, 0.3);
           }
         }
 
         .btn-reject {
-          background-color: #ff4757;
-          color: white;
+          background-color: rgba($primary-red, 0.05);
+          color: $primary-red;
+          border: 1px solid rgba($primary-red, 0.1);
 
           &:hover {
-            background-color: #ff3344;
+            background-color: $primary-red;
+            color: white;
+            box-shadow: 0 6px 15px rgba($primary-red, 0.2);
           }
         }
       }
     }
   }
 
-  .loading-text, .empty-text {
+  .loading-text,
+  .empty-text {
     text-align: center;
-    color: #747d8c;
-    font-size: 18px;
-    padding: 3rem;
+    color: $text-muted;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 5rem;
   }
 }

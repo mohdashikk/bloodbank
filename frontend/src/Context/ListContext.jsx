@@ -36,7 +36,7 @@ export const DonorsProvider = ({ children }) => {
 
   const approveDonor = async (id) => {
     try {
-      const res = await api.post(
+      const res = await api.patch(
         `data/approve/${id}`,
         {},
         {
