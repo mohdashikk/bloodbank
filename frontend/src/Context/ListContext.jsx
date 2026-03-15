@@ -35,30 +35,30 @@ export const DonorsProvider = ({ children }) => {
   };
 
   const approveDonor = async (id) => {
-    try {
-      const res = await api.patch(
-        `data/approve/${id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+  try {
+    const res = await api.patch(
+      `data/approve/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      },
+    );
 
-      if (res.status === 200) {
-        setDonors((prevDonors) =>
-          prevDonors.map((donor) =>
-            donor.id === id ? { ...donor, is_approved: true } : donor,
-          ),
-        );
-        return true;
-      }
-    } catch (err) {
-      console.error("Failed to approve donor:", err);
-      return false;
+    if (res.status === 200) {
+      setDonors((prevDonors) =>
+        prevDonors.map((donor) =>
+          donor.id === id ? { ...donor, is_approved: true } : donor,
+        ),
+      );
+      return true;
     }
-  };
+  } catch (err) {
+    console.error("Failed to approve donor", err);
+    return false;
+  }
+};
 
   const onHandleClear = () => {
     setFilter({
