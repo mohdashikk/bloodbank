@@ -9,13 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-//Test api
-
-// app.get("/api/test", (req, res) => {
-//   res.status(200).json({ message: "Working" });
-// });
-
-//api's
+ 
 
 app.use("/api/auth", authRoute);
 app.use("/api/data", fetchRoute);
